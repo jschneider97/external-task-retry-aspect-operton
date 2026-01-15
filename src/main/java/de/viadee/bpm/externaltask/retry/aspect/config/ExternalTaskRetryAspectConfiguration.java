@@ -90,7 +90,7 @@ public class ExternalTaskRetryAspectConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnClass(org.camunda.bpm.client.ExternalTaskClient.class)
+    @ConditionalOnClass(org.operaton.bpm.client.ExternalTaskClient.class)
     public OperatonExternalTaskRetryAspect operatonExternalTaskRetryAspect(@Autowired final FailureService failureService, @Autowired BusinessErrorService businessErrorService) {
         return new OperatonExternalTaskRetryAspect(
                 businessErrorService,
