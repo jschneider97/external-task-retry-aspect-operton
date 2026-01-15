@@ -47,6 +47,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties({CamundaExternalTaskRetryAspectProperties.class, OperatonExternalTaskRetryAspectProperties.class})
 public class ExternalTaskRetryAspectConfiguration {
 
     private final OperatonExternalTaskRetryAspectProperties operatonExternalTaskRetryAspectProperties;
