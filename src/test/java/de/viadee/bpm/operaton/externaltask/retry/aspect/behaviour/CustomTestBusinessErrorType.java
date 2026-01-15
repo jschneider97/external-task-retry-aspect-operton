@@ -31,7 +31,7 @@
  */
 package de.viadee.bpm.operaton.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.externaltask.retry.aspect.error.ExternalTaskBusinessError;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.error.ExternalTaskBusinessError;
 
 public class CustomTestBusinessErrorType extends ExternalTaskBusinessError {
     public CustomTestBusinessErrorType(final String message) {

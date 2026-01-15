@@ -32,8 +32,8 @@
 package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
 import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
-import de.viadee.bpm.externaltask.retry.aspect.error.ExternalTaskBusinessError;
-import de.viadee.bpm.externaltask.retry.aspect.error.InstantIncidentException;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.error.ExternalTaskBusinessError;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.error.InstantIncidentException;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
 import org.junit.jupiter.api.Test;

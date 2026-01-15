@@ -31,7 +31,7 @@
  */
 package de.viadee.bpm.externaltask.retry.aspect.service;
 
-import de.viadee.bpm.externaltask.retry.aspect.error.ExternalTaskBusinessError;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.error.ExternalTaskBusinessError;
 import de.viadee.bpm.externaltask.retry.aspect.model.ExternalTaskAdapter;
 import de.viadee.bpm.externaltask.retry.aspect.model.ExternalTaskServiceAdapter;
 import org.slf4j.LoggerFactory;

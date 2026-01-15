@@ -31,8 +31,8 @@
  */
 package de.viadee.bpm.externaltask.retry.aspect.service;
 
-import de.viadee.bpm.externaltask.retry.aspect.model.RetryBehaviour;
-import de.viadee.bpm.externaltask.retry.aspect.model.RetryConfigValues;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.model.RetryBehaviour;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.model.RetryConfigValues;
 import de.viadee.bpm.externaltask.retry.aspect.config.RetryAspectConfiguration;
 import de.viadee.bpm.externaltask.retry.aspect.model.ExternalTaskAdapter;
 
