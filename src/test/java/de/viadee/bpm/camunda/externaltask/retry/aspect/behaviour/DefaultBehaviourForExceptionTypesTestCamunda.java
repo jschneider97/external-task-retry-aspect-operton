@@ -31,9 +31,9 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.BaseTest;
-import de.viadee.bpm.camunda.externaltask.retry.aspect.error.ExternalTaskBusinessError;
-import de.viadee.bpm.camunda.externaltask.retry.aspect.error.InstantIncidentException;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
+import de.viadee.bpm.externaltask.retry.aspect.error.ExternalTaskBusinessError;
+import de.viadee.bpm.externaltask.retry.aspect.error.InstantIncidentException;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 
-public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
+public class DefaultBehaviourForExceptionTypesTestCamunda extends CamundaBaseTest {
 
 
     @Test
@@ -53,7 +53,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
         when(this.externalTask.getRetries()).thenReturn(null); // 1st try
 
         // test
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, runtimeException, this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, runtimeException, this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoBpmnErrorAtAll();
@@ -71,7 +71,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
     public void instantIncidentExceptionWithRootCause() {
         final RuntimeException rootCause = new RuntimeException("root-cause");
 
-        this.externalTaskRetryAspect
+        this.camundaExternalTaskRetryAspect
                 .handleErrorAfterThrown(this.joinPoint,
                         new InstantIncidentException("no-retries", rootCause),
                         this.externalTask, this.externalTaskService);
@@ -91,7 +91,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
     @Test
     public void emptyInstantIncidentExceptionWithRootCause() {
 
-        this.externalTaskRetryAspect
+        this.camundaExternalTaskRetryAspect
                 .handleErrorAfterThrown(this.joinPoint,
                         new InstantIncidentException(),
                         this.externalTask, this.externalTaskService);
@@ -111,7 +111,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
     @Test
     public void emptyRootInstantIncidentException() {
         InstantIncidentException instantIncidentException = new InstantIncidentException(new RuntimeException());
-        this.externalTaskRetryAspect
+        this.camundaExternalTaskRetryAspect
                 .handleErrorAfterThrown(this.joinPoint, instantIncidentException,
                                             this.externalTask, this.externalTaskService);
 
@@ -130,7 +130,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
     @Test
     public void instantIncidentException() {
         InstantIncidentException instantIncidentException = new InstantIncidentException("instant-incident-no-retries-plz");
-        this.externalTaskRetryAspect
+        this.camundaExternalTaskRetryAspect
                 .handleErrorAfterThrown(this.joinPoint,
                         instantIncidentException,
                         this.externalTask, this.externalTaskService);
@@ -151,7 +151,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
     public void instantCustomIncidentException() {
         RuntimeException rootCause = new RuntimeException("root-cause");
         CustomTestInstantErrorType customError = new CustomTestInstantErrorType("instant-custom-incident", rootCause);
-        this.externalTaskRetryAspect
+        this.camundaExternalTaskRetryAspect
                 .handleErrorAfterThrown(this.joinPoint, customError,
                         this.externalTask, this.externalTaskService);
 
@@ -169,7 +169,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
 
     @Test
     public void emptyBpmBusinessException() {
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new ExternalTaskBusinessError(), this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new ExternalTaskBusinessError(), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoFailure();
@@ -183,7 +183,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
 
     @Test
     public void onlyCodeBpmBusinessException() {
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new ExternalTaskBusinessError("only-code"), this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new ExternalTaskBusinessError("only-code"), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoFailure();
@@ -197,7 +197,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
 
     @Test
     public void bpmBusinessException() {
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new ExternalTaskBusinessError("code", "bpmn-error-message"), this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new ExternalTaskBusinessError("code", "bpmn-error-message"), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoFailure();
@@ -212,7 +212,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
     public void bpmBusinessExceptionWithVariables() {
         final VariableMap variables = Variables.createVariables().putValue("darth", "vader").putValue("r2d", 2);
         final ExternalTaskBusinessError businessError = new ExternalTaskBusinessError("var-code", "bpmn-error-with-variables", variables);
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, businessError, this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, businessError, this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoFailure();
@@ -229,7 +229,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
     @Test
     public void bpmCustomBusinessException() {
         final CustomTestBusinessErrorType customBusinessError = new CustomTestBusinessErrorType("custom-code");
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, customBusinessError, this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, customBusinessError, this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoFailure();

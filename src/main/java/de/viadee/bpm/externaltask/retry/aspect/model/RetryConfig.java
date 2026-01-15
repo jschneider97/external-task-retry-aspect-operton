@@ -29,12 +29,24 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.externaltask.retry.aspect.model;
 
-import de.viadee.bpm.externaltask.retry.aspect.error.InstantIncidentException;
+import java.util.Objects;
 
-public class CustomTestInstantErrorType extends InstantIncidentException {
-    public CustomTestInstantErrorType(final String message, final Throwable cause) {
-        super(message, cause);
+public class RetryConfig {
+
+    private final String retryProperty;
+
+    public RetryConfig(final String retryProperty, final RetryConfigValues valueVault) {
+        if (Objects.isNull(retryProperty) || retryProperty.trim().isEmpty()) {
+            this.retryProperty = valueVault.getDefaultRetryConfig();
+        } else {
+            this.retryProperty = retryProperty.replace(" ", "").toUpperCase();
+        }
     }
+
+    public String getRetryProperty() {
+        return this.retryProperty;
+    }
+
 }

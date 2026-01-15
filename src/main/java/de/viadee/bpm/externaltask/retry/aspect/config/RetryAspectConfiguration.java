@@ -29,32 +29,31 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect;
+package de.viadee.bpm.externaltask.retry.aspect.config;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectProperties;
-import org.junit.jupiter.api.Test;
+import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+public abstract class RetryAspectConfiguration {
 
+    private String defaultBehavior;
+    private String identifier;
 
-public class ExternalTaskRetryAspectPropertiesTest {
-
-    @Test
-    public void propertiesShouldNotBeNullTest() {
-        ExternalTaskRetryAspectProperties properties = new ExternalTaskRetryAspectProperties();
-        properties.setIdentifier(null);
-        properties.setDefaultBehavior(null);
-        assertEquals("R3/PT5M", properties.getDefaultBehavior());
-        assertEquals("RETRY_CONFIG", properties.getIdentifier());
+    public String getDefaultBehavior() {
+        return this.defaultBehavior;
     }
 
-
-    @Test
-    public void propertiesShouldNotBeEmptyTest() {
-        ExternalTaskRetryAspectProperties properties = new ExternalTaskRetryAspectProperties();
-        properties.setIdentifier("  ");
-        properties.setDefaultBehavior("  ");
-        assertEquals("R3/PT5M", properties.getDefaultBehavior());
-        assertEquals("RETRY_CONFIG", properties.getIdentifier());
+    public void setDefaultBehavior(final String defaultBehavior) {
+        if (Objects.isNull(defaultBehavior) || defaultBehavior.trim().isEmpty()) return;
+        this.defaultBehavior = defaultBehavior.replace(" ", "").toUpperCase();
     }
+
+    public String getIdentifier() {
+        return this.identifier;
+    }
+
+    public void setIdentifier(final String identifier) {
+        if (Objects.isNull(identifier) || identifier.trim().isEmpty()) return;
+        this.identifier = identifier;
+    }
+
 }

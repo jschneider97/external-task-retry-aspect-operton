@@ -29,24 +29,53 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.model;
+package de.viadee.bpm.externaltask.retry.aspect.error;
 
-import java.util.Objects;
 
-public class RetryConfig {
+public class InstantIncidentException extends RuntimeException {
 
-    private final String retryProperty;
-
-    public RetryConfig(final String retryProperty, final RetryConfigValues valueVault) {
-        if (Objects.isNull(retryProperty) || retryProperty.trim().isEmpty()) {
-            this.retryProperty = valueVault.getDefaultRetryConfig();
-        } else {
-            this.retryProperty = retryProperty.replace(" ", "").toUpperCase();
-        }
+    /**
+     * This error-type can used to report a failure in the context of the
+     * current task and skip the retry-behaviour configured in process-model,
+     * resp. the default behaviour.
+     *
+     */
+    public InstantIncidentException() {
+        super();
     }
 
-    public String getRetryProperty() {
-        return this.retryProperty;
+    /**
+     * This error-type can used to report a failure in the context of the
+     * current task and skip the retry-behaviour configured in process-model,
+     * resp. the default behaviour.
+     *
+     * @param message error-message passed to the process
+     */
+    public InstantIncidentException(final String message) {
+        super(message);
+    }
+
+    /**
+     * This error-type can used to report a failure in the context of the
+     * current task and skip the retry-behaviour configured in process-model,
+     * resp. the default behaviour.
+     *
+     * @param message error-message passed to the process
+     * @param cause root cause passed to the process
+     */
+    public InstantIncidentException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    /**
+     * This error-type can used to report a failure in the context of the
+     * current task and skip the retry-behaviour configured in process-model,
+     * resp. the default behaviour.
+     *
+     * @param cause root cause passed to the process
+     */
+    public InstantIncidentException(final Throwable cause) {
+        super(null, cause);
     }
 
 }

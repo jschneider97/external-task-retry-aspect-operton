@@ -31,36 +31,12 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.config;
 
+import de.viadee.bpm.externaltask.retry.aspect.config.RetryAspectConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.Objects;
 
 
 @ConfigurationProperties(prefix = "de.viadee.bpm.camunda.external-task.retry-config")
-public class ExternalTaskRetryAspectProperties {
-
-    //@formatter:off
-    private String defaultBehavior    = "R3/PT5M";
-    private String identifier         = "RETRY_CONFIG";
-    //@formatter:on
-
-
-    public String getDefaultBehavior() {
-        return this.defaultBehavior;
-    }
-
-    public void setDefaultBehavior(final String defaultBehavior) {
-        if (Objects.isNull(defaultBehavior) || defaultBehavior.trim().isEmpty()) return;
-        this.defaultBehavior = defaultBehavior.replace(" ", "").toUpperCase();
-    }
-
-    public String getIdentifier() {
-        return this.identifier;
-    }
-
-    public void setIdentifier(final String identifier) {
-        if (Objects.isNull(identifier) || identifier.trim().isEmpty()) return;
-        this.identifier = identifier;
-    }
+public class CamundaExternalTaskRetryAspectProperties extends RetryAspectConfiguration {
 
 }

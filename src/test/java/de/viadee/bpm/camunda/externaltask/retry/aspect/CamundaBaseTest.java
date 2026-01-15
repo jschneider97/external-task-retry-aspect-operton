@@ -31,8 +31,8 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectAutoConfiguration;
-import de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectProperties;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.config.CamundaExternalTaskRetryAspectProperties;
+import de.viadee.bpm.externaltask.retry.aspect.config.ExternalTaskRetryAspectConfiguration;
 import org.aspectj.lang.JoinPoint;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskService;
@@ -58,10 +58,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-@ContextConfiguration(classes = {ExternalTaskRetryAspectAutoConfiguration.class})
+@ContextConfiguration(classes = {ExternalTaskRetryAspectConfiguration.class})
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
-public abstract class BaseTest {
+public abstract class CamundaBaseTest {
 
     //@formatter:off
     protected static final long SECONDS_TO_MILLIS =                1000L; //             ms
@@ -81,10 +81,10 @@ public abstract class BaseTest {
     protected ArgumentCaptor<Long> nextRetryInterval;
 
     @Autowired
-    protected ExternalTaskRetryAspect externalTaskRetryAspect;
+    protected CamundaExternalTaskRetryAspect camundaExternalTaskRetryAspect;
 
     @Autowired
-    protected ExternalTaskRetryAspectProperties properties;
+    protected CamundaExternalTaskRetryAspectProperties properties;
 
 
     @BeforeEach
