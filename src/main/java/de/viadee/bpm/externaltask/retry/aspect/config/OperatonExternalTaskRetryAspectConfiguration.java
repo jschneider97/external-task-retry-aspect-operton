@@ -44,7 +44,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionalOnClass(org.operaton.bpm.client.ExternalTaskClient.class)
-@EnableConfigurationProperties(OperatonExternalTaskRetryAspectProperties.class)
 public class OperatonExternalTaskRetryAspectConfiguration {
 
     @Bean

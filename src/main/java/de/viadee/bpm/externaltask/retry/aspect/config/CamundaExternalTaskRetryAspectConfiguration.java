@@ -44,7 +44,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionalOnClass(org.camunda.bpm.client.ExternalTaskClient.class)
-@EnableConfigurationProperties({CamundaExternalTaskRetryAspectProperties.class})
 public class CamundaExternalTaskRetryAspectConfiguration {
 
     @Bean
