@@ -39,7 +39,7 @@ import static org.mockito.Mockito.when;
 
 
 @TestPropertySource(properties = "de.viadee.bpm.operaton.external-task.retry-config.default-behavior=R3/PT37M")
-public class InvalidRetryTimeCycleValuesTestCamunda extends OperatonBaseTest {
+public class InvalidRetryTimeCycleValuesTestOperaton extends OperatonBaseTest {
 
 
     @Test

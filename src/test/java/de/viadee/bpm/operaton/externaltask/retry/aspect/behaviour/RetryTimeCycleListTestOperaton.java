@@ -39,7 +39,7 @@ import java.util.Objects;
 import static org.mockito.Mockito.when;
 
 
-public class RetryTimeCycleListTestCamunda extends OperatonBaseTest {
+public class RetryTimeCycleListTestOperaton extends OperatonBaseTest {
 
     //                                              10.   9.   8.      7.   6.        5.  4.      3.      2.      1.
     private static final String RETRY_CYCLE_LIST = "PT10S,PT2M,PT3M45S,PT4H,PT5H42M2S,P4D,P5DT11H,P5DT11M,P5DT33S,P11DT11H11M11S";

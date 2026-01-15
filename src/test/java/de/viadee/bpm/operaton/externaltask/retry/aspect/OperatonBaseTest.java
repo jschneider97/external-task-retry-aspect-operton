@@ -32,6 +32,7 @@
 package de.viadee.bpm.operaton.externaltask.retry.aspect;
 
 import de.viadee.bpm.externaltask.retry.aspect.config.ExternalTaskRetryAspectConfiguration;
+import de.viadee.bpm.externaltask.retry.aspect.config.OperatonExternalTaskRetryAspectConfiguration;
 import de.viadee.bpm.externaltask.retry.aspect.config.RetryAspectConfigurationAdapter;
 import de.viadee.bpm.operaton.externaltask.retry.aspect.config.OperatonExternalTaskRetryAspect;
 import de.viadee.bpm.operaton.externaltask.retry.aspect.config.config.OperatonExternalTaskRetryAspectProperties;
@@ -43,6 +44,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -56,7 +58,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-@ContextConfiguration(classes = {ExternalTaskRetryAspectConfiguration.class})
+@ContextConfiguration(classes = {ExternalTaskRetryAspectConfiguration.class, OperatonExternalTaskRetryAspectConfiguration.class})
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 public abstract class OperatonBaseTest {
