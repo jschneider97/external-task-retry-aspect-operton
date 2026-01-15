@@ -31,7 +31,7 @@ public class RetryAspectConfigurationAdapter extends RetryAspectConfiguration {
     @Override
     public String getIdentifier() {
         return Optional.ofNullable(camundaProperties)
-                .map(RetryAspectConfiguration::getDefaultBehavior)
+                .map(RetryAspectConfiguration::getIdentifier)
                 .filter(StringUtils::isNotBlank).or(() -> Optional.ofNullable(operatonExternalTaskRetryAspectProperties).map(RetryAspectConfiguration::getIdentifier))
                 .filter(StringUtils::isNotBlank)
                 .orElse(identifier);

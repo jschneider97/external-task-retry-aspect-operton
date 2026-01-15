@@ -29,14 +29,15 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect;
+package de.viadee.bpm.operaton.externaltask.retry.aspect;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.config.CamundaExternalTaskRetryAspectProperties;
 import de.viadee.bpm.externaltask.retry.aspect.config.ExternalTaskRetryAspectConfiguration;
 import de.viadee.bpm.externaltask.retry.aspect.config.RetryAspectConfigurationAdapter;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.config.OperatonExternalTaskRetryAspect;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.config.config.OperatonExternalTaskRetryAspectProperties;
 import org.aspectj.lang.JoinPoint;
-import org.camunda.bpm.client.task.ExternalTask;
-import org.camunda.bpm.client.task.ExternalTaskService;
+import org.operaton.bpm.client.task.ExternalTask;
+import org.operaton.bpm.client.task.ExternalTaskService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -51,18 +52,14 @@ import java.io.StringWriter;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyMap;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ContextConfiguration(classes = {ExternalTaskRetryAspectConfiguration.class})
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
-public abstract class CamundaBaseTest {
+public abstract class OperatonBaseTest {
 
     //@formatter:off
     protected static final long SECONDS_TO_MILLIS =                1000L; //             ms
@@ -82,17 +79,17 @@ public abstract class CamundaBaseTest {
     protected ArgumentCaptor<Long> nextRetryInterval;
 
     @Autowired
-    protected CamundaExternalTaskRetryAspect camundaExternalTaskRetryAspect;
+    protected OperatonExternalTaskRetryAspect operatonExternalTaskRetryAspect;
 
     @Autowired
-    protected CamundaExternalTaskRetryAspectProperties camundaProperties;
+    protected OperatonExternalTaskRetryAspectProperties operatonProperties;
 
     protected RetryAspectConfigurationAdapter properties;
 
 
     @BeforeEach
     public void initTestData() {
-        properties = new RetryAspectConfigurationAdapter(camundaProperties, null);
+        properties = new RetryAspectConfigurationAdapter(null, operatonProperties);
         Mockito.reset(this.externalTask, this.externalTaskService, this.joinPoint);
         Mockito.when(this.joinPoint.getTarget()).thenReturn(Object.class);
 
