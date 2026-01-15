@@ -31,8 +31,8 @@
  */
 package de.viadee.bpm.operaton.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.externaltask.retry.aspect.error.ExternalTaskBusinessError;
-import de.viadee.bpm.externaltask.retry.aspect.error.InstantIncidentException;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.error.ExternalTaskBusinessError;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.error.InstantIncidentException;
 import de.viadee.bpm.operaton.externaltask.retry.aspect.OperatonBaseTest;
 import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.variable.VariableMap;

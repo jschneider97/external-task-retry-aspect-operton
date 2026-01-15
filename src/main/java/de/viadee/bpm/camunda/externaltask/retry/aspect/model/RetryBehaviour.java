@@ -29,7 +29,9 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.externaltask.retry.aspect.model;
+package de.viadee.bpm.camunda.externaltask.retry.aspect.model;
+
+import de.viadee.bpm.externaltask.retry.aspect.model.ExternalTaskAdapter;
 
 import java.time.Duration;
 import java.time.format.DateTimeParseException;

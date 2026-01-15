@@ -31,8 +31,8 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect;
 
-import de.viadee.bpm.externaltask.retry.aspect.error.ExternalTaskBusinessError;
-import de.viadee.bpm.externaltask.retry.aspect.error.InstantIncidentException;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.error.ExternalTaskBusinessError;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.error.InstantIncidentException;
 import de.viadee.bpm.externaltask.retry.aspect.model.ExternalTaskAdapter;
 import de.viadee.bpm.externaltask.retry.aspect.model.ExternalTaskServiceAdapter;
 import de.viadee.bpm.externaltask.retry.aspect.service.BusinessErrorService;
