@@ -31,33 +31,19 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.BaseTest;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.default-behavior=R3/PT1D")
-public class InvalidDefaultBehaviourTest extends BaseTest {
 
+@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.identifier=CUSTOM_SOMETHING")
+public class CustomRetryTimeCycleIdentifierTestCamunda extends CamundaBaseTest {
 
     @Test
-    public void runtimeException() {
-        // prepare
-        when(this.externalTask.getRetries()).thenReturn(null);
-        when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn("invld!");
-
-        // test
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
-
-        // verify
-        this.verifyNoBpmnErrorAtAll();
-        this.verifyHandleFailure();
-
-        // assert
-        this.assertRemainingRetries(3);
-        this.assertNextRetryInterval(5 * MINUTES_TO_MILLIS);
+    public void customRetryTimeCycleIdentifier() {
+        assertEquals("CUSTOM_SOMETHING", this.properties.getIdentifier());
     }
-
 
 }

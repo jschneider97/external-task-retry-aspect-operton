@@ -1,1 +1,1 @@
-de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectAutoConfiguration
+de.viadee.bpm.externaltask.retry.aspect.config.ExternalTaskRetryAspectConfiguration

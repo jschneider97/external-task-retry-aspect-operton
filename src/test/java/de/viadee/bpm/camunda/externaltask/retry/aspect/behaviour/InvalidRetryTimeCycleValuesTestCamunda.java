@@ -29,29 +29,48 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.model;
+package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
-import java.util.Objects;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.context.TestPropertySource;
 
-public class RetryCount {
+import static org.mockito.Mockito.when;
 
-    private final Integer retries;
 
-    public RetryCount(final Integer retries) {
-        this.retries = retries;
+@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.default-behavior=R3/PT37M")
+public class InvalidRetryTimeCycleValuesTestCamunda extends CamundaBaseTest {
+
+
+    @Test
+    public void invalidRetryTimeCycle() {
+        // PT3D not valid -> 'default-retry-time-cycle' should be used
+        this.invalidTimeCycleDetectedByRegularExpression("R3/PT3D");
     }
 
-    public boolean hasRetries() {
-        return Objects.nonNull(this.retries);
+
+    @Test
+    public void invalidRetryTimeCycleList() {
+        // PT3D not valid -> 'default-retry-time-cycle' should be used
+        this.invalidTimeCycleDetectedByRegularExpression("PT10M,PT3D,PT10M");
     }
 
-    public Integer nextRetries() {
-        if (this.getRetries() <= 0) return 0;
-        else return this.getRetries() - 1;
-    }
 
-    public Integer getRetries() {
-        return this.retries;
+    public void invalidTimeCycleDetectedByRegularExpression(final String retryTimeCycle) {
+        // prepare
+        when(this.externalTask.getRetries()).thenReturn(3);
+        when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn(retryTimeCycle);
+
+        // test
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+
+        // verify
+        this.verifyNoBpmnErrorAtAll();
+        this.verifyHandleFailure();
+
+        // assert
+        this.assertRemainingRetries(2);
+        this.assertNextRetryInterval(37 * MINUTES_TO_MILLIS);
     }
 
 }

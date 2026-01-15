@@ -29,9 +29,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.model;
-
-import org.camunda.bpm.client.task.ExternalTask;
+package de.viadee.bpm.externaltask.retry.aspect.model;
 
 import java.time.Duration;
 import java.time.format.DateTimeParseException;
@@ -43,7 +41,7 @@ public class RetryBehaviour {
     private final RetryConfig retryConfig;
     private final RetryConfigValues valueVault;
 
-    public RetryBehaviour(final ExternalTask externalTask, final RetryConfigValues valueVault) {
+    public RetryBehaviour(final ExternalTaskAdapter externalTask, final RetryConfigValues valueVault) {
         this.valueVault = valueVault;
         this.retryCount = new RetryCount(externalTask.getRetries());
         this.retryConfig = new RetryConfig(externalTask.getExtensionProperty(valueVault.getRetryConfigName()), valueVault);

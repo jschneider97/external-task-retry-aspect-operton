@@ -31,7 +31,7 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.BaseTest;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -39,7 +39,7 @@ import java.util.Objects;
 import static org.mockito.Mockito.when;
 
 
-public class RetryTimeCycleListTest extends BaseTest {
+public class RetryTimeCycleListTestCamunda extends CamundaBaseTest {
 
     //                                              10.   9.   8.      7.   6.        5.  4.      3.      2.      1.
     private static final String RETRY_CYCLE_LIST = "PT10S,PT2M,PT3M45S,PT4H,PT5H42M2S,P4D,P5DT11H,P5DT11M,P5DT33S,P11DT11H11M11S";
@@ -123,7 +123,7 @@ public class RetryTimeCycleListTest extends BaseTest {
         when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn(RETRY_CYCLE_LIST);
 
         // test
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoBpmnErrorAtAll();
