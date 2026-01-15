@@ -35,29 +35,15 @@ import de.viadee.bpm.operaton.externaltask.retry.aspect.OperatonBaseTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@TestPropertySource(properties = "de.viadee.bpm.operaton.external-task.retry-config.default-behavior=R3/PT1D")
-public class InvalidDefaultBehaviourTestCamunda extends OperatonBaseTest {
 
+@TestPropertySource(properties = "de.viadee.bpm.operaton.external-task.retry-config.identifier=CUSTOM_SOMETHING")
+public class CustomRetryTimeCycleIdentifierTestOperaton extends OperatonBaseTest {
 
     @Test
-    public void runtimeException() {
-        // prepare
-        when(this.externalTask.getRetries()).thenReturn(null);
-        when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn("invld!");
-
-        // test
-        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
-
-        // verify
-        this.verifyNoBpmnErrorAtAll();
-        this.verifyHandleFailure();
-
-        // assert
-        this.assertRemainingRetries(3);
-        this.assertNextRetryInterval(5 * MINUTES_TO_MILLIS);
+    public void customRetryTimeCycleIdentifier() {
+        assertEquals("CUSTOM_SOMETHING", this.properties.getIdentifier());
     }
-
 
 }

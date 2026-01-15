@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 
-public class DefaultBehaviourForExceptionTypesTestCamunda extends OperatonBaseTest {
+public class DefaultBehaviourForExceptionTypesTestOperaton extends OperatonBaseTest {
 
 
     @Test

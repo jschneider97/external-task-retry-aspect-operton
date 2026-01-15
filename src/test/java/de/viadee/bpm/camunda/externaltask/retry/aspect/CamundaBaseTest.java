@@ -32,6 +32,7 @@
 package de.viadee.bpm.camunda.externaltask.retry.aspect;
 
 import de.viadee.bpm.camunda.externaltask.retry.aspect.config.CamundaExternalTaskRetryAspectProperties;
+import de.viadee.bpm.externaltask.retry.aspect.config.CamundaExternalTaskRetryAspectConfiguration;
 import de.viadee.bpm.externaltask.retry.aspect.config.ExternalTaskRetryAspectConfiguration;
 import de.viadee.bpm.externaltask.retry.aspect.config.RetryAspectConfigurationAdapter;
 import org.aspectj.lang.JoinPoint;
@@ -59,7 +60,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-@ContextConfiguration(classes = {ExternalTaskRetryAspectConfiguration.class})
+@ContextConfiguration(classes = {ExternalTaskRetryAspectConfiguration.class, CamundaExternalTaskRetryAspectConfiguration.class})
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 public abstract class CamundaBaseTest {

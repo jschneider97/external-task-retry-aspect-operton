@@ -47,7 +47,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties({OperatonExternalTaskRetryAspectProperties.class, CamundaExternalTaskRetryAspectProperties.class})
 public class ExternalTaskRetryAspectConfiguration {
 
     private final OperatonExternalTaskRetryAspectProperties operatonExternalTaskRetryAspectProperties;
@@ -77,26 +76,5 @@ public class ExternalTaskRetryAspectConfiguration {
     public FailureService failureHandlingService(@Autowired final PropertyService propertyService) {
         return new FailureService(propertyService);
     }
-
-    @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnClass(org.camunda.bpm.client.ExternalTaskClient.class)
-    public CamundaExternalTaskRetryAspect camundaExternalTaskRetryAspect(@Autowired final FailureService failureService, @Autowired BusinessErrorService businessErrorService) {
-        return new CamundaExternalTaskRetryAspect(
-                businessErrorService,
-                failureService
-        );
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnClass(org.operaton.bpm.client.ExternalTaskClient.class)
-    public OperatonExternalTaskRetryAspect operatonExternalTaskRetryAspect(@Autowired final FailureService failureService, @Autowired BusinessErrorService businessErrorService) {
-        return new OperatonExternalTaskRetryAspect(
-                businessErrorService,
-                failureService
-        );
-    }
-
 
 }
