@@ -27,4 +27,6 @@ jobs:
           server-username: ${{ vars.MAVEN_USERNAME }}
           server-password: ${{ secrets.MAVEN_USERNAME_SECRET }}
       - name: Publish package
-        run: mvn clean package source:jar javadoc:jar deploy --batch-mode
+        run: |
+          cat ~/.m2/settings.xml
+          mvn clean package source:jar javadoc:jar deploy --batch-mode
