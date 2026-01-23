@@ -11,25 +11,20 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v4
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Maven Central Repository
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '21'
-          cache: 'maven'
+          distribution: 'temurin'
           server-id: central
           server-username: MAVEN_USERNAME
-          server-password: MAVEN_USERNAME_SECRET
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Publish package
-        run: |
-          cat ~/.m2/settings.xml
-          mvn clean package source:jar javadoc:jar deploy --batch-mode
+        run: mvn -P release --batch-mode deploy
         env:
-          MAVEN_USERNAME: ${{ vars.MAVEN_USERNAME }}
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_USERNAME_SECRET }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
