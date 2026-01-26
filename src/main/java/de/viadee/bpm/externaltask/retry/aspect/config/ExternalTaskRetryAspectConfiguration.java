@@ -31,23 +31,22 @@
  */
 package de.viadee.bpm.externaltask.retry.aspect.config;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaExternalTaskRetryAspect;
+
 import de.viadee.bpm.camunda.externaltask.retry.aspect.config.CamundaExternalTaskRetryAspectProperties;
 import de.viadee.bpm.externaltask.retry.aspect.service.BusinessErrorService;
 import de.viadee.bpm.externaltask.retry.aspect.service.FailureService;
 import de.viadee.bpm.externaltask.retry.aspect.service.PropertyService;
-import de.viadee.bpm.operaton.externaltask.retry.aspect.config.OperatonExternalTaskRetryAspect;
 import de.viadee.bpm.operaton.externaltask.retry.aspect.config.config.OperatonExternalTaskRetryAspectProperties;
-import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @EnableConfigurationProperties({CamundaExternalTaskRetryAspectProperties.class, OperatonExternalTaskRetryAspectProperties.class})
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class ExternalTaskRetryAspectConfiguration {
 
     private final OperatonExternalTaskRetryAspectProperties operatonExternalTaskRetryAspectProperties;
