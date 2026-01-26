@@ -33,33 +33,28 @@ package de.viadee.bpm.operaton.externaltask.retry.aspect.behaviour;
 
 import de.viadee.bpm.operaton.externaltask.retry.aspect.OperatonBaseTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.TestPropertySource;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 
-@TestPropertySource(properties = "de.viadee.bpm.operaton.external-task.retry-config.default-behavior=R3/PT37M")
-public class InvalidRetryTimeCycleValuesTestOperaton extends OperatonBaseTest {
-
+public class EdgeCaseTest extends OperatonBaseTest {
 
     @Test
-    public void invalidRetryTimeCycle() {
-        // PT3D not valid -> 'default-retry-time-cycle' should be used
-        this.invalidTimeCycleDetectedByRegularExpression("R3/PT3D");
+    public void testMethod() {
+        try {
+            this.operatonExternalTaskRetryAspect.externalTaskHandlerExecute(null, null);
+
+        } catch (Exception exception) {
+            fail("should not fail");
+        }
     }
 
 
     @Test
-    public void invalidRetryTimeCycleList() {
-        // PT3D not valid -> 'default-retry-time-cycle' should be used
-        this.invalidTimeCycleDetectedByRegularExpression("PT10M,PT3D,PT10M");
-    }
-
-
-    public void invalidTimeCycleDetectedByRegularExpression(final String retryTimeCycle) {
+    public void negativeRetriesTest() {
         // prepare
-        when(this.externalTask.getRetries()).thenReturn(3);
-        when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn(retryTimeCycle);
+        when(this.externalTask.getRetries()).thenReturn(-1); // however
 
         // test
         this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
@@ -69,8 +64,49 @@ public class InvalidRetryTimeCycleValuesTestOperaton extends OperatonBaseTest {
         this.verifyHandleFailure();
 
         // assert
-        this.assertRemainingRetries(2);
-        this.assertNextRetryInterval(37 * MINUTES_TO_MILLIS);
+        this.assertRemainingRetries(0);
+    }
+
+
+    @Test
+    public void runtimeException() {
+        // prepare
+        when(this.externalTask.getRetries()).thenReturn(null);
+        when(this.externalTask
+                .getExtensionProperty(this.properties.getIdentifier()))
+                    .thenReturn("P,P,P"); // sadly, 'P' is matched by the used regex currently -> use hard-wired Fallback 'PT10M' then
+
+        // test
+        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+
+        // verify
+        this.verifyNoBpmnErrorAtAll();
+        this.verifyHandleFailure();
+
+        // assert
+        this.assertRemainingRetries(3);
+        this.assertNextRetryInterval(5 * MINUTES_TO_MILLIS);
+    }
+
+
+    @Test
+    public void noRetryBehaviour() {
+        // prepare
+        when(this.externalTask.getRetries()).thenReturn(null);
+        when(this.externalTask
+                .getExtensionProperty(this.properties.getIdentifier()))
+                    .thenReturn("R0/PT2M");
+
+        // test
+        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException("test"), this.externalTask, this.externalTaskService);
+
+        // verify
+        this.verifyNoBpmnErrorAtAll();
+        this.verifyHandleFailure();
+
+        // assert
+        this.assertRemainingRetries(0);
+        this.assertNextRetryInterval(0);
     }
 
 }

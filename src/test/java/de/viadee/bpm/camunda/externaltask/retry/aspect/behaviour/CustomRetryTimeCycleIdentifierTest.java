@@ -29,35 +29,21 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.operaton.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.operaton.externaltask.retry.aspect.OperatonBaseTest;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@TestPropertySource(properties = "de.viadee.bpm.operaton.external-task.retry-config.default-behavior=R3/PT1D")
-public class InvalidDefaultBehaviourTestOperaton extends OperatonBaseTest {
 
+@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.identifier=CUSTOM_SOMETHING")
+public class CustomRetryTimeCycleIdentifierTest extends CamundaBaseTest {
 
     @Test
-    public void runtimeException() {
-        // prepare
-        when(this.externalTask.getRetries()).thenReturn(null);
-        when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn("invld!");
-
-        // test
-        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
-
-        // verify
-        this.verifyNoBpmnErrorAtAll();
-        this.verifyHandleFailure();
-
-        // assert
-        this.assertRemainingRetries(3);
-        this.assertNextRetryInterval(5 * MINUTES_TO_MILLIS);
+    public void customRetryTimeCycleIdentifier() {
+        assertEquals("CUSTOM_SOMETHING", this.properties.getIdentifier());
     }
-
 
 }

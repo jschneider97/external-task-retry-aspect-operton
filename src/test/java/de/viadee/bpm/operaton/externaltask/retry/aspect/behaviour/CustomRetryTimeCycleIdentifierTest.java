@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @TestPropertySource(properties = "de.viadee.bpm.operaton.external-task.retry-config.identifier=CUSTOM_SOMETHING")
-public class CustomRetryTimeCycleIdentifierTestOperaton extends OperatonBaseTest {
+public class CustomRetryTimeCycleIdentifierTest extends OperatonBaseTest {
 
     @Test
     public void customRetryTimeCycleIdentifier() {

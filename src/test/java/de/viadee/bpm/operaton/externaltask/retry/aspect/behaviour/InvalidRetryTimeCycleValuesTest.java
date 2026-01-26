@@ -29,17 +29,17 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.operaton.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.OperatonBaseTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
 import static org.mockito.Mockito.when;
 
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.default-behavior=R3/PT37M")
-public class InvalidRetryTimeCycleValuesTestCamunda extends CamundaBaseTest {
+@TestPropertySource(properties = "de.viadee.bpm.operaton.external-task.retry-config.default-behavior=R3/PT37M")
+public class InvalidRetryTimeCycleValuesTest extends OperatonBaseTest {
 
 
     @Test
@@ -62,7 +62,7 @@ public class InvalidRetryTimeCycleValuesTestCamunda extends CamundaBaseTest {
         when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn(retryTimeCycle);
 
         // test
-        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoBpmnErrorAtAll();
