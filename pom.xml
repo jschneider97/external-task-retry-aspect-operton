@@ -43,6 +43,7 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-aop</artifactId>
                     <version>${spring-boot.version}</version>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>
@@ -59,6 +60,7 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-aspectj</artifactId>
                     <version>${spring-boot.version}</version>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>
@@ -135,6 +137,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring-boot.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -142,6 +151,7 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <version>${spring-boot.version}</version>
             <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
 
 
