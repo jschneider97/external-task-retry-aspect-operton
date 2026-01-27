@@ -1,7 +1,8 @@
 # external-task-retry-aspect
 [![](https://img.shields.io/maven-central/v/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)](https://search.maven.org/artifact/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/viadee/external-task-retry-aspect)
-[![](https://img.shields.io/badge/External%20Task%20Handler-7.24.0-orange.svg)](https://docs.camunda.org/manual/7.24/user-guide/ext-client/spring-boot-starter)
+[![](https://img.shields.io/badge/Camunda%20External%20Task%20Handler-7.24.0-orange.svg)](https://docs.camunda.org/manual/7.24/user-guide/ext-client/spring-boot-starter)
+[![](https://img.shields.io/badge/Operaton%20External%20Task%20Handler-1.0.3-white.svg)](https://docs.operaton.org/docs/documentation/user-guide/process-engine/external-tasks/)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/viadee/external-task-retry-aspect/maven-build.yml)
 [![](https://img.shields.io/github/issues/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/issues)
 [![](https://img.shields.io/github/stars/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/stargazers)
@@ -191,20 +192,21 @@ The following versions are used. Older versions are probably not maintained, but
 use a newer version of the Retry-Aspect in combination with an older version of the External-Task-Client. If you encounter
 any issue, please feel free to contact me.
 
-| Retry-Aspect | External-Task-Client | Spring Boot |  
-|-------------:|---------------------:|------------:|
-|        1.2.x |               7.15.0 |       2.5.x |
-|        1.3.x |               7.16.0 |       2.6.x |
-|        1.4.x |               7.17.0 |       2.6.x |
-|        1.4.2 |               7.17.0 |       2.7.x |
-|        1.5.x |               7.18.0 |       2.7.x |
-|        1.6.x |               7.19.0 |       2.7.x |
-|        1.7.x |               7.19.0 |       2.7.x |
-|        1.8.x |               7.20.0 |       3.1.x |
-|        1.9.0 |               7.21.0 |       3.3.x |
-|       1.9.1+ |               7.22.0 |       3.3.x |
-|       1.10.0 |               7.23.0 |       3.4.x |
-|       1.11.0 |               7.24.0 |       3.5.x |
+| Retry-Aspect | Camunda External-Task-Client | Operaton External-Task-Client |                     Spring Boot |  
+|-------------:|-----------------------------:|------------------------------:|--------------------------------:|
+|        1.2.x |                       7.15.0 |                   Unsupported |                           2.5.x |
+|        1.3.x |                       7.16.0 |                   Unsupported |                           2.6.x |
+|        1.4.x |                       7.17.0 |                   Unsupported |                           2.6.x |
+|        1.4.2 |                       7.17.0 |                   Unsupported |                           2.7.x |
+|        1.5.x |                       7.18.0 |                   Unsupported |                           2.7.x |
+|        1.6.x |                       7.19.0 |                   Unsupported |                           2.7.x |
+|        1.7.x |                       7.19.0 |                   Unsupported |                           2.7.x |
+|        1.8.x |                       7.20.0 |                   Unsupported |                           3.1.x |
+|        1.9.0 |                       7.21.0 |                   Unsupported |                           3.3.x |
+|       1.9.1+ |                       7.22.0 |                   Unsupported |                           3.3.x |
+|       1.10.0 |                       7.23.0 |                   Unsupported |                           3.4.x |
+|      1.11.0+ |                       7.24.0 |                   Unsupported |                           3.5.x |
+|      1.12.0+ |                       7.24.0 |                         1.0.3 |                           3.5.x |
 
 
 ## 🤹 Collaboration
