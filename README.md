@@ -11,6 +11,12 @@ This tool helps to control the retry-behaviour in external-task-handlers based o
 official [java-client](https://docs.camunda.org/manual/latest/user-guide/ext-client/) provided
 by [Camunda BPM](https://docs.camunda.org/manual/latest/user-guide/ext-client/).
 
+## ⚠️ Important notice
+With the latest release support for the Camunda 7 Fork [Operaton](https://operaton.org) is added. 
+In this release we try to keep the compatibility to the previous releases as high as possible. 
+Therefor the artifact is still located under `de.viadee.bpm.camunda`, we take the liberty to change this in upcoming releases.
+We also consider splitting this library into two releases one for each engine or dropping support for Camunda 7 in upcoming releases.
+
 ## ⭐ Features
 * Retry-behaviour for external-tasks can be configured in process-models as known from `JavaDelegates`
   like `R3/PT1M`, meaning *three times each after one minute*
@@ -20,6 +26,30 @@ by [Camunda BPM](https://docs.camunda.org/manual/latest/user-guide/ext-client/).
 * Configurable default retry-behaviour
 
 ## 🚀 How to use
+
+### 🆕 New Feature
+Starting with Release `1.12.0` to use this library with [Operaton](https://operaton.org), 
+simply replace the `camunda-external-task-client` dependency with the following, the retry-aspect automatically detects which library to bind to:
+
+```xml
+ <!-- works either with the original external-task-client... -->    
+<dependency>
+    <groupId>org.operaton.bpm</groupId>
+    <artifactId>operaton-external-task-client</artifactId>
+    <version>...</version>
+</dependency>
+        
+<!-- ...or with new spring-boot-starter-external-task-client -->
+<dependency>
+    <groupId>org.operaton.bpm.springboot</groupId>
+    <artifactId>operaton-bpm-spring-boot-starter-external-task-client</artifactId>
+    <version>...</version>
+</dependency>
+
+```
+
+
+
 1. Besides the `camunda-external-task-client` dependency, the following maven-coordinate needs to be added to the `pom.xml`. As
 a `spring-boot-starter`, the aspect will be loaded automatically as soon as the handler-application starts:
 ```xml
@@ -91,6 +121,17 @@ de.viadee.bpm.camunda.external-task.retry-config.default-behavior=R3/PT5M
 
 # Identifier used in bpmn-extension-properties, default=RETRY_CONFIG
 de.viadee.bpm.camunda.external-task.retry-config.identifier=RETRY_CONFIG
+```
+
+#### 🆕 New Feature
+Starting with Version `1.12.0` for Operaton based engines, the configuration properties can also be the following, support for the camunda based properties is still available:
+```properties
+# Default retry-behaviour, if no retry is configured. 
+# Whenever this property is configured incorrectly, 'R3/PT5M' is also used as fallback
+de.viadee.bpm.operaton.external-task.retry-config.default-behavior=R3/PT5M
+
+# Identifier used in bpmn-extension-properties, default=RETRY_CONFIG
+de.viadee.bpm.operaton.external-task.retry-config.identifier=RETRY_CONFIG
 ```
 
 ## 🧙 How this might help?
