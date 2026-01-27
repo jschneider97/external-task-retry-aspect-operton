@@ -37,7 +37,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
 @ConfigurationProperties(prefix = "de.viadee.bpm.operaton.external-task.retry-config")
-@ConditionalOnProperty("de.viadee.bpm.camunda.external-task.retry-config.default-behavior")
+@ConditionalOnProperty("de.viadee.bpm.operaton.external-task.retry-config.default-behavior")
 public class OperatonExternalTaskRetryAspectProperties extends RetryAspectConfiguration {
 
 }
